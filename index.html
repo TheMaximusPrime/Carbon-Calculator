@@ -77,6 +77,22 @@
     const form = document.getElementById("carbonForm");
     const resultDiv = document.getElementById("result");
 
+    const tips = [
+      "Switch to LED bulbs to reduce electricity use.",
+      "Use public transport or carpool whenever possible.",
+      "Try having one meat-free day every week.",
+      "Unplug electronics when not in use to save power.",
+      "Air-dry clothes instead of using a dryer.",
+      "Install solar panels if feasible.",
+      "Maintain your vehicle to improve fuel efficiency.",
+      "Buy local and seasonal produce to reduce transport emissions."
+    ];
+
+    function getRandomTip() {
+      const index = Math.floor(Math.random() * tips.length);
+      return tips[index];
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
@@ -95,6 +111,8 @@
 
       const totalCO2 = electricityCO2 + transportCO2 + meatCO2;
 
+      const tip = getRandomTip();
+
       resultDiv.innerHTML = `
         <h3>Your Annual Carbon Footprint</h3>
         <p><strong>${totalCO2.toFixed(2)}</strong> kg of CO₂/year</p>
@@ -103,7 +121,7 @@
           <li><strong>Transport:</strong> ${transportCO2.toFixed(2)} kg</li>
           <li><strong>Diet (Non-Veg):</strong> ${meatCO2.toFixed(2)} kg</li>
         </ul>
-        <p><em>Tip:</em> Consider switching to LED lights, using public transport, or having 1–2 meat-free days a week to reduce your carbon footprint.</p>
+        <p><em>Tip:</em> ${tip}</p>
       `;
     });
   </script>
